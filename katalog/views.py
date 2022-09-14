@@ -7,6 +7,6 @@ def show_katalog(request):
     context = {
         'list_item': catalog_item_data,
         'nama': 'TM Revanza Narendra Pradipta',
-        'npm': '2206025003'
+        'npm': '2206025003',
     }
     return render(request, "katalog.html", context)
