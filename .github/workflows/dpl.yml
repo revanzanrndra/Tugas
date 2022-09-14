@@ -11,8 +11,8 @@ on:
     # commits pushed to the main branch. Therefore, the deployed app that
     # will be accessed by users will be based on the latest version of the
     # main branch.
-    branches:
-      - main
+    # branches:
+    #   - main
 
     branches-ignore:
       - template
