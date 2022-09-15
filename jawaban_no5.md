@@ -3,7 +3,7 @@ https://tugas2-revanza.herokuapp.com/katalog/
 
 ## Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html;
 
-<img src="images/Bagan-Tugas2-PBP.png" >
+<img src="Bagan-Tugas2-PBP.png" >
 
 ## Jelaskan kenapa menggunakan virtual environment? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment?
 Sesuai dengan namanya, virtual environment berarti adalah sebuah lingkungan bagi projek yang sedang kita kerjakan. Virtual environment berperan sebagai ruang isolasi yang memisahkan antara package dan dependancies dengan aplikasi yang sedang kita kembangkan, hal ini bertujuan agar aplikasi yang sedang kita kembangkan tidak clash dengan versi lain yang ada di local computer. Misalkan kita sedang membuat aplikasi A dengan menggunakan library X, lalu beberapa waktu kemudian kita sedang membuat aplikasi B yang menggunakan library X juga, tetapi library X sudah memiliki versi terbaru dan kita melakukan update library tersebut, jika kita tidak membuat virtual environment, maka dengan melakukan update library, kita akan merusak aplikasi A yang telah kita buat karena aplikasi A dibuat dengan library X versi terdahulu, intinya tidak ada ruang yang memisahkan antara lingkungan aplikasi A dan B. Jadi apakah kita bisa membuat aplikasi tanpa menggunakan virtual environment? Bisa saja, tetapi risikonya seperti yang sudah dijelaskan di atas.
