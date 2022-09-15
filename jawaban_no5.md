@@ -23,8 +23,3 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 Selanjutnya saya melakukan add, commit, dan push.
 Setelah itu, saya menyalin API key dari akun saya. Lalu saya membuat dua repository secret, yang pertama adalah HEROKU_APP_NAME yang berisi tugas2-revanza, yang kedua adalah HEROKU_API_KEY yang berisi API key saya. Terakhir saya menjalankan workflow, jika status deployment sukses, maka aplikasi sudah bisa diakses.
-
-
-
-
-## bisa kamu upload image nya kesuatu link atau taro di repository, terus diembed ke readmenya. bisa dibaca lebih lanjut di https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
