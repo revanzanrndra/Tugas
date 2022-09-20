@@ -6,7 +6,7 @@ def return_message():
     numbers_of_yes = 0
     numbers_of_no = 0
 
-    dir  = "Tugas\\mywatchlist\\fixtures\\initial_mywatchlist_data.json"
+    dir  = "mywatchlist\\fixtures\\initial_mywatchlist_data.json"
     open_data = open(dir)
 
     data = json.load(open_data)
