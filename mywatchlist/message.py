@@ -1,4 +1,3 @@
-import json
 from mywatchlist.models import MovieWatchlist
 
 # Fungsi untuk mengembalikan pesan "Selamat, kamu sudah banyak menonton!" jika banyak sudah nonton >= belum nonton
