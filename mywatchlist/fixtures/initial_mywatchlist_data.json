@@ -1,0 +1,112 @@
+[
+    {
+        "model":"mywatchlist.moviewatchlist",
+        "pk":1,
+        "fields":{
+            "watched":"Yes",
+            "title":"Queen's Gambit",
+            "rating": 5,
+            "release_date":"23 Oktober 2020",
+            "review":"Keren banget! Recommended walaupun gak ngerti catur."
+        }
+    },
+    {
+        "model":"mywatchlist.moviewatchlist",
+        "pk":2,
+        "fields":{
+            "watched":"Yes",
+            "title":"The Grudge",
+            "rating": 1,
+            "release_date":"1 Januari 2020",
+            "review":"Cerita kurang jelas. Modal jumpscare doang."
+        }
+    },
+    {
+        "model":"mywatchlist.moviewatchlist",
+        "pk":3,
+        "fields":{
+            "watched":"Yes",
+            "title":"Stranger Things",
+            "rating": 4,
+            "release_date":"15 Juli 2016",
+            "review":"Simple but fun."
+        }
+    },
+    {
+        "model":"mywatchlist.moviewatchlist",
+        "pk":4,
+        "fields":{
+            "watched":"Yes",
+            "title":"Pengabdi Setan 2",
+            "rating": 3,
+            "release_date":"4 Agustus 2022",
+            "review":"Seru! Tapi filmnya sekedar seru aja, gak lebih."
+        }
+    },
+    {
+        "model":"mywatchlist.moviewatchlist",
+        "pk":5,
+        "fields":{
+            "watched":"Yes",
+            "title":"Up",
+            "rating": 5,
+            "release_date":"29 Juli 2009",
+            "review":"Best animation movie of my childhood."
+        }
+    },
+    {
+        "model":"mywatchlist.moviewatchlist",
+        "pk":6,
+        "fields":{
+            "watched":"Yes",
+            "title":"The Raid 2",
+            "rating": 4,
+            "release_date":"28 Maret 2014",
+            "review":"Film yang 'melelahkan', probably the best action movie ever."
+        }
+    },
+    {
+        "model":"mywatchlist.moviewatchlist",
+        "pk":7,
+        "fields":{
+            "watched":"Yes",
+            "title":"The Wailing",
+            "rating": 4,
+            "release_date":"12 Mei 2016",
+            "review":"Film horror tanpa jumpscare yang cukup bikin merinding."
+        }
+    },
+    {
+        "model":"mywatchlist.moviewatchlist",
+        "pk":8,
+        "fields":{
+            "watched":"Yes",
+            "title":"The Northman",
+            "rating": 4,
+            "release_date":"22 April 2022",
+            "review":"Pertama kali nonton film tema viking, and it's good."
+        }
+    },
+    {
+        "model":"mywatchlist.moviewatchlist",
+        "pk":9,
+        "fields":{
+            "watched":"Yes",
+            "title":"The Batman",
+            "rating": 4,
+            "release_date":"4 maret 2022",
+            "review":"Nunjukkin sisi manusia dari seorang Batman dan itu menarik banget."
+        }
+    },
+    {
+        "model":"mywatchlist.moviewatchlist",
+        "pk":10,
+        "fields":{
+            "watched":"Yes",
+            "title":"Harry Potter Series",
+            "rating": 5,
+            "release_date":"19 Desember 2001",
+            "review":"It's my childhood, so it's a 5."
+        }
+    }
+]
