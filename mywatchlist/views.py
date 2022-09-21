@@ -18,6 +18,9 @@ def show_watchlist(request):
     }
     return render(request, "watchlist.html", context)
 
+def show_html(request):
+    return show_watchlist(request)
+
 def show_xml(request):
     data = returnData().all()
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
