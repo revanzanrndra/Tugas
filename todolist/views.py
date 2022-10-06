@@ -13,6 +13,7 @@ from todolist.forms import TaskForm
 @login_required(login_url='/todolist/login/')
 def show_todolist(request):
     data = Task.objects.filter(user=request.user)
+
     context = {
         'task':data,
         'username':request.user,
@@ -31,6 +32,19 @@ def create_task(request):
             return redirect('todolist:show_todolist')
 
     return render(request, 'create_task.html', {'form':form})
+
+def update_task(request, id):
+    task = Task.objects.get(pk=id)
+    task.is_finished = not task.is_finished
+    task.save()
+
+    return redirect('todolist:show_todolist')
+
+def delete_task(request, id):
+    task = Task.objects.get(pk=id)
+    task.delete()
+
+    return redirect('todolist:show_todolist')
     
 def register(request):
     form = UserCreationForm()
