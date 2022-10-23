@@ -118,4 +118,4 @@ Cara implementasi AJAX adalah dengan menambahkan ```html
         return false
         }
     ```
-    Pada fungsi di atas, program akan mengambil mengambil data yang telah diinput melalui form dan memanggil fungsi refreshTodolist, pada fungsi refreshTodolist inilah halaman utaman akan menampilkan list terbaru tanpa me-reload seluruh page.
+    Pada fungsi di atas, program akan mengambil data yang telah diinput melalui form dan memanggil fungsi refreshTodolist, pada fungsi refreshTodolist inilah halaman utaman akan menampilkan list terbaru tanpa me-reload seluruh page.
