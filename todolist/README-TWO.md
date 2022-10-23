@@ -18,22 +18,26 @@ Cara implementasi AJAX adalah dengan menambahkan ```html
 ## Cara saya mengimplementasikan checklist deskripsi tugas 6:
 # AJAX GET
 - Membuat view yang mengembalikan seluruh data task dalam bentuk JSON
+
     ```python   
     def get_todolist_json(request):
         data = Task.objects.filter(user=request.user)
         return HttpResponse(serializers.serialize("json", data), content_type="application/json")
     ```
 - Membuat path /todolist/json yang mengarah ke view yang baru dibuat
+
     Pada file urls.py, di fungsi urlpatterns, saya menambahkan potongan kode berikut:
     ```python 
     path('json/', get_todolist_json, name='get_todolist_json'),
     ```
 
 - Mengambil task dengan AJAX GET
+
     Dalam tag script, saya membuat fungsi getTodolist yang mengambil data dari database dalam bentuk JSON, lalu membuat fungsi refreshTodolist, pada fungsi ini, saya mengiterasi objek data yang dikembalikan oleh getTodolist, lalu dari data tersebut saya meng-construct card dengan membuat script html di tiap iterasinya, script tersebut akan di-concat ke string variabel htmlString, setelah iterasi selesai, innerHTML dari div untuk meletakkan card akan diisi dengan htmlString.
 
 # AJAX POST
 - Membuat tombol Add Task yang membuka sebuah modal dengan form untuk menambahkan task
+
     Untuk membuat tombol Add Task yang membuka sebuah modal, saya menambahkan potongan kode berikut:
     ```html 
     <div class="container">
@@ -76,6 +80,7 @@ Cara implementasi AJAX adalah dengan menambahkan ```html
     ```
 
 - Membuat view baru untuk menambahkan task baru ke dalam database
+
     Saya menambahkan fungsi berikut:
     ```python
     def add_task_ajax(request):
@@ -90,15 +95,18 @@ Cara implementasi AJAX adalah dengan menambahkan ```html
     ```
 
 - Membuat path /todolist/add yang mengarah ke view yang baru dibuat
+
     Pada file urls.py, di fungsi urlpatterns, saya menambahkan potongan kode berikut:
     ```python 
     path('add/', add_task_ajax, name='add_task_ajax')
     ```
 
 - Menutup modal setelah penambahan task berhasil dilakukan
+
     Bisa dilihat pada potongan kode html untuk membuat modal yang saya tampilkan di poin pertama bagian AJAX POST, untuk button dengan id btn-submit, saya menambahkan atribut data-bs-dismiss dengan value modal, yang artinya setiap submit dilakukan, maka modal akan tertutup.
 
 - Melakukan refresh pada halaman utama secara asinkronus untuk menampilkan list terbaru tanpa reload seluruh page
+
     Saat tombol submit diklik, program akan memanggil fungsi addTask
     ```javascript
     function addTask() {
