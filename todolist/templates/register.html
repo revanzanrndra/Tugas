@@ -40,7 +40,7 @@
             <div class = "login mt-3">
         
                 <h1><font>Formulir Registrasi</font></h1>  
-            
+        
                 <form method="POST" >  
                     {% csrf_token %}  
                     <table>  
@@ -73,13 +73,6 @@
 
                     </table>  
                 </form>
-                {% if messages %}  
-                    <ul>   
-                        {% for message in messages %}  
-                            <li>{{ message }}</li>  
-                        {% endfor %}  
-                    </ul>   
-                {% endif %}
             </div>
         </div>
 

@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Task 5</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     <style>
       body {
         background-color: rgb(26, 22, 22);
@@ -37,11 +39,11 @@
         border: none;
         margin-top: auto;
       }
-      #checklist-btn {
+      .checklist-btn {
         background: none;
         margin-top: auto;
       }
-      #delete-btn {
+      .delete-btn {
         background-color: rgb(197, 38, 38);
         margin-top: auto;
       }
@@ -49,6 +51,13 @@
         background-color: rgb(102, 88, 158);
       }
       font {
+        color: white;
+      }
+      .modal-content {
+        background-color: rgb(59, 54, 54);
+      }
+      .close {
+        background: none;
         color: white;
       }
       
@@ -68,35 +77,144 @@
       <div class="title" style="padding-top: 7px; padding-left: 7px; padding-right: 7px;">
         <h6><font>Welcome, {{username}}</font></h6>
         <h3><font>List of Tasks</font></h3>
-        <button id="create-btn"><a href="{% url 'todolist:create_task' %}"><font>Create New Task</font></a></button>
+        <button id="create-btn" data-bs-toggle="modal" data-bs-target="#createTaskModal"><font>Add Task</font></button>
       </div>
     </div>
 
     <div class="container">
-      <div class="row mt-1" style="padding-top: 1px; padding-left: 7px; padding-right:7px; padding-bottom: 7px;">
-        {% for t in task %}
-          <div class="col-md-3" style="padding-top: 15px;">
-            {% if t.is_finished %}
-              <div class="card h-100" style="background-color: rgb(34, 188, 60);">
-            {% else %} 
-              <div class="card h-100">
-            {% endif %}
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title"><font>{{t.title}}</font></h5>
-                  <h6 class="card-text"><font>{{t.date}}</font></h6>
-                  <p class="card-text"><font>{{t.description}}</font></p>
-                  <div class="btn">
-                    <button id="checklist-btn"><a href="{% url 'todolist:update_task' t.id %}"><font>Checklist</font></a></button>
-                    <button id="delete-btn"><a href="{% url 'todolist:delete_task' t.id %}"><font>Delete</font></a></button>
-                  </div>
-                </div>
-              </div>
-          </div>
-        {% endfor %}
-      </div>
+      <div class="row mt-1" id="cardPlace" style="padding-top: 1px; padding-left: 7px; padding-right:7px; padding-bottom: 7px;"></div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <div class="modal fade" id="createTaskModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header border-0">
+            <h5 class="modal-title"><font>CREATE NEW TASK</font></h5>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form id="createTaskForm" onsubmit="return false;">
+            {% csrf_token %}
+            <div class="modal-body">
+              <fieldset>
+                  <input type="text" name="title" placeholder="Title" class="form-control mb-2">
+                  <textarea name="description" class="form-control" placeholder="Description" style="height:200px; width:100%"></textarea>
+              </fieldset>
+            </div>
+            <div class="modal-footer border-0">
+              <button id="btn-submit" class="btn btn-primary" value="Submit" type="submit" data-bs-dismiss="modal">Submit</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </body>
-</html>
 
+  <script>
+    async function getTodolist() {
+      return fetch("{% url 'todolist:get_todolist_json' %}").then((res) => res.json())
+    }
+
+    async function refreshTodolist() {
+      document.getElementById("createTaskForm").reset();
+      const todolistData = await getTodolist()
+      let htmlString = ``
+      todolistData.forEach((item) => {
+        var fields = item.fields
+        var divCol = document.createElement("div");
+        divCol.classList.add("col-md-3");
+        divCol.style.cssText += 'padding-top: 15px;';
+
+        var divCard = document.createElement("div");
+        divCard.classList.add("card");
+        divCard.classList.add("h-100");
+        if (fields.is_finished) {
+          divCard.style.cssText += 'background-color: rgb(34, 188, 60);';
+        } else {
+          divCard.style.cssText += '';
+        }
+
+        var divCardBody = document.createElement("div");
+        divCardBody.classList.add("card-body");
+        divCardBody.classList.add("d-flex");
+        divCardBody.classList.add("flex-column");
+
+        var cardTitle = document.createElement("h5");
+        cardTitle.classList.add("card-title");
+        cardTitle.classList.add("text-white");
+        cardTitle.innerHTML = fields.title
+        divCardBody.appendChild(cardTitle);
+
+        var cardDate = document.createElement("h6");
+        cardDate.classList.add("card-text");
+        cardDate.classList.add("text-white");
+        cardDate.innerHTML = fields.date
+        divCardBody.appendChild(cardDate);
+
+        var cardDesc = document.createElement("p");
+        cardDesc.classList.add("card-text");
+        cardDesc.classList.add("text-white");
+        cardDesc.innerHTML = fields.description
+        divCardBody.appendChild(cardDesc);
+
+        var divBtn = document.createElement("div");
+        divBtn.classList.add("btn");
+
+        var checklistBtn = document.createElement("button");
+        checklistBtn.classList.add("checklist-btn");
+        checklistBtn.classList.add("text-white");
+        checklistBtn.innerHTML = "Checklist";
+        checklistBtn.setAttribute('onclick', `updateTask(${item.pk})`);
+        divBtn.appendChild(checklistBtn);
+
+        var deleteBtn = document.createElement("button");
+        deleteBtn.classList.add("delete-btn");
+        deleteBtn.classList.add("text-white");
+        deleteBtn.innerHTML = "Delete";
+        deleteBtn.setAttribute('onclick', `deleteTask(${item.pk})`);
+        divBtn.appendChild(deleteBtn);
+
+        divCardBody.appendChild(divBtn);
+        divCard.appendChild(divCardBody);
+        divCol.appendChild(divCard);
+
+        htmlString += divCol.outerHTML
+      });
+
+      document.getElementById("cardPlace").innerHTML = htmlString;
+    }
+
+    function updateTodolist() {
+      $.getJSON("{% url 'todolist:get_todolist_json' %}", refreshTodolist);
+    }
+
+    function updateTask(pk) {
+      $.ajax({
+        url:`update-task/${pk}/`,
+        type: 'POST',
+        success: updateTodolist,
+      });
+    }
+
+    function deleteTask(pk) {
+      $.ajax({
+        url:`delete-task/${pk}/`,
+        type: 'DELETE',
+        success: updateTodolist,
+      });
+    }
+
+    function addTask() {
+      fetch("{% url 'todolist:add_task_ajax' %}", {
+        method: "POST",
+        body: new FormData(document.querySelector('#createTaskForm'))
+      }).then(refreshTodolist)
+      return false
+    }
+    
+    document.getElementById("btn-submit").onclick = addTask
+    refreshTodolist()
+  </script>
+</html>
